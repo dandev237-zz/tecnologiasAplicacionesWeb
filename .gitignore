@@ -35,6 +35,6 @@ proyectoTAW-ejb/build.xml
 
 proyectoTAW-war/build/
 proyectoTAW-war/dist/
-proyectoTAW-war/web/
+proyectoTAW-war/web/WEB-INF/
 proyectoTAW-war/nbproject/
 proyectoTAW-war/build.xml
