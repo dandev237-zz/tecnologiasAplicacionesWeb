@@ -26,3 +26,15 @@ build/
 test/
 build.xml
 manifest.mf
+
+proyectoTAW-ejb/build/
+proyectoTAW-ejb/dist/
+proyectoTAW-ejb/setup/
+proyectoTAW-ejb/nbproject/
+proyectoTAW-ejb/build.xml
+
+proyectoTAW-war/build/
+proyectoTAW-war/dist/
+proyectoTAW-war/web/
+proyectoTAW-war/nbproject/
+proyectoTAW-war/build.xml
