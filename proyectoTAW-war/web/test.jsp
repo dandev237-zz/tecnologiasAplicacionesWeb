@@ -14,19 +14,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        sdasdd
-        <%
-            List<Tusers> list = (List<Tusers>) request.getAttribute("list");
-            if (list != null){
-                for(int i = 0; i < list.size(); i++){
-                    Tusers t = list.get(i);
-                    %>
-                    <h1>
-                        <%=t.getUsername()%>
-                    </h1>
-                    <%
-                }
-            }
-            %>
+        <h1>Hello world!</h1>
+        <%=
+          request.getAttribute("msg")
+        %>
     </body>
 </html>

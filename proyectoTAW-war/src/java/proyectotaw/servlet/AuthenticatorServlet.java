@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import proyectotaw.ejb.TusersFacade;
 import proyectotaw.entity.Tusers;
 
@@ -20,16 +21,15 @@ import proyectotaw.entity.Tusers;
  *
  * @author Alberto
  */
-@WebServlet(name = "Servlet", urlPatterns = {"/Servlet"})
-public class Servlet extends HttpServlet {
+@WebServlet(name = "AuthenticatorServlet", urlPatterns = {"/auth"})
+public class AuthenticatorServlet extends HttpServlet {
+
     @EJB
     private TusersFacade tusersFacade;
-    
 
     /**
-     * Processes requests for both HTTP
-     * <code>GET</code> and
-     * <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -38,16 +38,45 @@ public class Servlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Tusers> list = tusersFacade.findAll();
-        request.setAttribute("list", list);
-        RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/test.jsp");
+        String username = (String) request.getParameter("user"),
+                pass = (String) request.getParameter("pass");
+        if (username == null || pass == null){
+            request.setAttribute("error", "Username or passowrd is null");
+            request.setAttribute("cause", "The username or password wasn't getted correctly.");
+            getServletContext().getRequestDispatcher("/error.jsp").forward(request, response);
+            return;
+        }
+        List<Tusers> users = tusersFacade.findAll();
+        Tusers user = null;
+        for (Tusers tusers : users) {
+            if (tusers.getUsername().equals(username)) {
+                user = tusers;
+                break;
+            }
+        }
+        if (user == null) {
+            request.setAttribute("cause", "The username " + username + " is not registered");
+            request.setAttribute("error", "Username not found");
+            getServletContext().getRequestDispatcher("/error.jsp")
+                    .forward(request, response);
+            return;
+        }
+        if (!pass.equals(user.getPassword())) {
+            request.setAttribute("error", "Password missmatch");
+            request.setAttribute("cause", "The password isn't correct");
+            getServletContext().getRequestDispatcher("/error.jsp")
+                    .forward(request, response);
+            return;
+        }
+        HttpSession session = request.getSession();
+        session.setAttribute("user", user);
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/menu.jsp");
         rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP
-     * <code>GET</code> method.
+     * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -61,8 +90,7 @@ public class Servlet extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP
-     * <code>POST</code> method.
+     * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response
