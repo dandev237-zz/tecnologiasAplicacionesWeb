@@ -1,7 +1,9 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package proyectotaw.entity;
 
 import java.io.Serializable;
@@ -19,18 +21,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Alberto
+ * @author infernage
  */
 @Entity
-@Table(name = "tpatientinfo")
+@Table(name = "tPatientInfo")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Tpatientinfo.findAll", query = "SELECT t FROM Tpatientinfo t"),
-    @NamedQuery(name = "Tpatientinfo.findById", query = "SELECT t FROM Tpatientinfo t WHERE t.id = :id"),
-    @NamedQuery(name = "Tpatientinfo.findByIdPatient", query = "SELECT t FROM Tpatientinfo t WHERE t.idPatient = :idPatient"),
-    @NamedQuery(name = "Tpatientinfo.findByIdMedic", query = "SELECT t FROM Tpatientinfo t WHERE t.idMedic = :idMedic"),
-    @NamedQuery(name = "Tpatientinfo.findByIdInfo", query = "SELECT t FROM Tpatientinfo t WHERE t.idInfo = :idInfo")})
-public class Tpatientinfo implements Serializable {
+    @NamedQuery(name = "TPatientInfo.findAll", query = "SELECT t FROM TPatientInfo t"),
+    @NamedQuery(name = "TPatientInfo.findById", query = "SELECT t FROM TPatientInfo t WHERE t.id = :id"),
+    @NamedQuery(name = "TPatientInfo.findByIdPatient", query = "SELECT t FROM TPatientInfo t WHERE t.idPatient = :idPatient"),
+    @NamedQuery(name = "TPatientInfo.findByIdMedic", query = "SELECT t FROM TPatientInfo t WHERE t.idMedic = :idMedic"),
+    @NamedQuery(name = "TPatientInfo.findByIdInfo", query = "SELECT t FROM TPatientInfo t WHERE t.idInfo = :idInfo")})
+public class TPatientInfo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -51,19 +53,19 @@ public class Tpatientinfo implements Serializable {
     private int idInfo;
     @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
     @OneToOne(optional = false)
-    private Tinfo tinfo;
+    private TInfo tInfo;
     @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
     @OneToOne(optional = false)
-    private Tusers tusers;
+    private TUsers tUsers;
 
-    public Tpatientinfo() {
+    public TPatientInfo() {
     }
 
-    public Tpatientinfo(Integer id) {
+    public TPatientInfo(Integer id) {
         this.id = id;
     }
 
-    public Tpatientinfo(Integer id, int idPatient, int idMedic, int idInfo) {
+    public TPatientInfo(Integer id, int idPatient, int idMedic, int idInfo) {
         this.id = id;
         this.idPatient = idPatient;
         this.idMedic = idMedic;
@@ -102,20 +104,20 @@ public class Tpatientinfo implements Serializable {
         this.idInfo = idInfo;
     }
 
-    public Tinfo getTinfo() {
-        return tinfo;
+    public TInfo getTInfo() {
+        return tInfo;
     }
 
-    public void setTinfo(Tinfo tinfo) {
-        this.tinfo = tinfo;
+    public void setTInfo(TInfo tInfo) {
+        this.tInfo = tInfo;
     }
 
-    public Tusers getTusers() {
-        return tusers;
+    public TUsers getTUsers() {
+        return tUsers;
     }
 
-    public void setTusers(Tusers tusers) {
-        this.tusers = tusers;
+    public void setTUsers(TUsers tUsers) {
+        this.tUsers = tUsers;
     }
 
     @Override
@@ -128,10 +130,10 @@ public class Tpatientinfo implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Tpatientinfo)) {
+        if (!(object instanceof TPatientInfo)) {
             return false;
         }
-        Tpatientinfo other = (Tpatientinfo) object;
+        TPatientInfo other = (TPatientInfo) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -140,7 +142,7 @@ public class Tpatientinfo implements Serializable {
 
     @Override
     public String toString() {
-        return "proyectotaw.entity.Tpatientinfo[ id=" + id + " ]";
+        return "proyectotaw.entity.TPatientInfo[ id=" + id + " ]";
     }
     
 }

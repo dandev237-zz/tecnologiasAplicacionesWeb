@@ -12,10 +12,8 @@
         <title>Index</title>
     </head>
     <body>
-        <a href="
-        <%=
-            request.getContextPath() + "/login.jsp"
+        <%
+            getServletContext().getRequestDispatcher("/index").forward(request, response);
         %>
-        ">Loggin</a>
     </body>
 </html>

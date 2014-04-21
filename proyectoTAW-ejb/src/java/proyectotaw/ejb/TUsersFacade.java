@@ -1,20 +1,22 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package proyectotaw.ejb;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import proyectotaw.entity.Tpatientinfo;
+import proyectotaw.entity.TUsers;
 
 /**
  *
- * @author Alberto
+ * @author infernage
  */
 @Stateless
-public class TpatientinfoFacade extends AbstractFacade<Tpatientinfo> {
+public class TUsersFacade extends AbstractFacade<TUsers> {
     @PersistenceContext(unitName = "proyectoTAW-ejbPU")
     private EntityManager em;
 
@@ -23,8 +25,8 @@ public class TpatientinfoFacade extends AbstractFacade<Tpatientinfo> {
         return em;
     }
 
-    public TpatientinfoFacade() {
-        super(Tpatientinfo.class);
+    public TUsersFacade() {
+        super(TUsers.class);
     }
     
 }

@@ -1,11 +1,13 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package proyectotaw.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,16 +24,16 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Alberto
+ * @author infernage
  */
 @Entity
-@Table(name = "troles")
+@Table(name = "tRoles")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Troles.findAll", query = "SELECT t FROM Troles t"),
-    @NamedQuery(name = "Troles.findById", query = "SELECT t FROM Troles t WHERE t.id = :id"),
-    @NamedQuery(name = "Troles.findByName", query = "SELECT t FROM Troles t WHERE t.name = :name")})
-public class Troles implements Serializable {
+    @NamedQuery(name = "TRoles.findAll", query = "SELECT t FROM TRoles t"),
+    @NamedQuery(name = "TRoles.findById", query = "SELECT t FROM TRoles t WHERE t.id = :id"),
+    @NamedQuery(name = "TRoles.findByName", query = "SELECT t FROM TRoles t WHERE t.name = :name")})
+public class TRoles implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -44,16 +46,16 @@ public class Troles implements Serializable {
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rol")
-    private Collection<Tusers> tusersCollection;
+    private List<TUsers> tUsersList;
 
-    public Troles() {
+    public TRoles() {
     }
 
-    public Troles(Integer id) {
+    public TRoles(Integer id) {
         this.id = id;
     }
 
-    public Troles(Integer id, String name) {
+    public TRoles(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -75,12 +77,12 @@ public class Troles implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Tusers> getTusersCollection() {
-        return tusersCollection;
+    public List<TUsers> getTUsersList() {
+        return tUsersList;
     }
 
-    public void setTusersCollection(Collection<Tusers> tusersCollection) {
-        this.tusersCollection = tusersCollection;
+    public void setTUsersList(List<TUsers> tUsersList) {
+        this.tUsersList = tUsersList;
     }
 
     @Override
@@ -93,10 +95,10 @@ public class Troles implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Troles)) {
+        if (!(object instanceof TRoles)) {
             return false;
         }
-        Troles other = (Troles) object;
+        TRoles other = (TRoles) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -105,7 +107,7 @@ public class Troles implements Serializable {
 
     @Override
     public String toString() {
-        return "proyectotaw.entity.Troles[ id=" + id + " ]";
+        return "proyectotaw.entity.TRoles[ id=" + id + " ]";
     }
     
 }

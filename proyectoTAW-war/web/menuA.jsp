@@ -1,17 +1,16 @@
 <%-- 
-    Document   : menu
-    Created on : 18-abr-2014, 14:05:17
+    Document   : menuA
+    Created on : 21-abr-2014, 17:51:34
     Author     : infernage
 --%>
 
 <%@page import="proyectotaw.entity.TUsers"%>
-<%@page import="proyectotaw.entity.TRoles"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Menu principal</title>
+        <title>Administración</title>
     </head>
     <body>
         <%
@@ -20,16 +19,11 @@
                 response.sendRedirect(getServletContext().getContextPath() + "/index");
                 return;
             }
-            TRoles rol = user.getRol();
-            if (rol.getId() == 0){
-                getServletContext().getRequestDispatcher("/menuA.jsp").forward(request, response);
-                return;
-            } else if (rol.getId() == 1){
-                getServletContext().getRequestDispatcher("/menuM.jsp").forward(request, response);
+            if (user.getRol().getId() != 0){
+                response.sendRedirect(getServletContext().getContextPath() + "/index");
                 return;
             }
-        %><br>Nombre:
-        <%=user.getName()%><br>NUHSA:<%=user.getNuhsa()%>
+        %>
         <table>
             <tr>
                 <th>Consultar</th>
@@ -81,6 +75,10 @@
                     </form></td>
             </tr>
         </table>
+        <br>
+        <form action="newUser.jsp" method="GET">
+            <button>Registrar usuario</button>
+        </form>
         <br>
         <form action="logout.jsp" method="GET">
             <input type="submit" value="Logout">
