@@ -34,7 +34,7 @@
                         <input type="submit" value="Mapa del hospital"
                                style="width: 240px;">
                     </form></td>
-                <td><form>
+                <td><form action="https://ws003.juntadeandalucia.es/pls/intersas/servicios.carpeta_salud.tramite_enlinea_cs" >
                         <input type="submit" value="Acceder a ClicSalud"
                                style="width: 240px;">
                     </form></td>
