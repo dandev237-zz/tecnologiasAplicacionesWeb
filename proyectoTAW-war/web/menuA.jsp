@@ -14,7 +14,7 @@
     </head>
     <body>
         <%
-            TUsers user = (TUsers) request.getSession().getAttribute("user");
+            TUsers user = (TUsers) session.getAttribute("user");
             if (user == null){
                 response.sendRedirect(getServletContext().getContextPath() + "/index");
                 return;
