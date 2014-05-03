@@ -26,7 +26,7 @@
         %>
         <table>
             <tr>
-                <td><form action="register"><button>Registrar usuario</button></form></td>
+                <td><form action="newUser.jsp"><button>Registrar usuario</button></form></td>
                 <td><form action="alert"><button>Enviar alertas</button></form></td>
             </tr>
             <tr>
