@@ -19,6 +19,7 @@ local.properties
 .launch
 .cproject
 .buildpath
+*/web/css
 *libs/
 *nbproject/
 *dist/

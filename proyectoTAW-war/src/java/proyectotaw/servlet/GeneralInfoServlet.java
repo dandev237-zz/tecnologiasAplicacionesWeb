@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package proyectotaw.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import proyectotaw.ejb.TInfoFacade;
 import proyectotaw.entity.TInfo;
+import proyectotaw.entity.TPatientInfo;
+import proyectotaw.entity.TUsers;
 
 /**
  *
@@ -25,10 +27,10 @@ import proyectotaw.entity.TInfo;
  */
 @WebServlet(name = "GeneralInfoServlet", urlPatterns = {"/GeneralInfoServlet"})
 public class GeneralInfoServlet extends HttpServlet {
+
     @EJB
     private TInfoFacade tInfoFacade;
 
-    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,18 +42,36 @@ public class GeneralInfoServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            
-        List<TInfo> lista;       
-        lista = tInfoFacade.findAll();
-        
-        request.setAttribute("lista", lista);
-        
+
+        TUsers user = (TUsers) request.getSession().getAttribute("user");
+        if (user == null){
+            request.getRequestDispatcher("/index").forward(request, response);
+            return;
+        }
+        int id = user.getId();
+        List<TInfo> lista = tInfoFacade.findAll();
+        List<TInfo> listaProcesada = new ArrayList<>();
+        for (TInfo t : lista) {
+            TPatientInfo info = t.getTPatientInfo();
+            if (info != null && info.getId() == id){
+                listaProcesada.add(t);
+            }
+        }
+        List<Integer> tipos = new ArrayList<>();
+        for (TInfo t : listaProcesada) {
+            if (!tipos.contains(t.getType())) {
+                tipos.add(t.getType());
+            }
+        }
+        Collections.sort(tipos);
+        request.setAttribute("tipos", tipos);
+        request.setAttribute("lista", listaProcesada);
+
         RequestDispatcher rd;
-        
+
         rd = request.getRequestDispatcher("/info.jsp");
         rd.forward(request, response);
-        }
-    
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
