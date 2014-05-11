@@ -24,26 +24,56 @@
             }
             if (user.getRol().getId() == 0) {
         %>
-        <form action="register" method="POST">
-            Nombre: <input type="text" name="name"><br>
-            Apellidos: <input type="text" name="appell"><br>
-            DNI: <input type="text" name="dni"><br>
-            Dirección: <input type="text" name="address"><br>
-            Tipo de usuario: <br>
-            <input type="radio" name="type" value="admin">Administrador<br>
-            <input type="radio" name="type" value="medic" checked>Médico<br>
-            <input type="radio" name="type" value="normalUser">Usuario<br>
-            <input type="submit" value="Registrar"> <input type="reset" value="Borrar datos">
-        </form>
+        <div class="col_w450" style="margin-left: 40%; margin-right: 0px;">
+            <div id="register_user_form">
+                <form action="register" method="POST">
+                    <label for="name">Nombre:</label>
+                    <input type="text" name="name" class="required input_field" id="name"/>
+                    <div class="cleaner_h10"></div>
+                    <label for="appell">Apellidos:</label>
+                    <input type="text" name="appell" class="required input_field" id="appell"/>
+                    <div class="cleaner_h10"></div>
+                    <label for="dni">DNI:</label>
+                    <input type="text" name="dni" class="required input_field" id="dni"/>
+                    <div class="cleaner_h10"></div>
+                    <label for="address">Dirección:</label>
+                    <input type="text" name="address" class="required input_field" id="address"/>
+                    <div class="cleaner_h10"></div>
+                    Tipo de usuario:<div class="cleaner_h10"></div>
+                    <input type="radio" name="type" value="admin">Administrador
+                    <div class="cleaner_h10"></div>
+                    <input type="radio" name="type" value="medic" checked>Médico
+                    <div class="cleaner_h10"></div>
+                    <input type="radio" name="type" value="normalUser">Usuario
+                    <div class="cleaner_h10"></div>
+                    <input type="submit" value="Registrar" class="submit_btn float_l">
+                    <input type="reset" value="Borrar datos" class="submit_btn float_l">
+                </form>
+            </div>
+        </div>
         <%                } else if (user.getRol().getId() == 1) {
         %>
-        <form action="register" method="POST">
-            Nombre: <input type="text" name="name"><br>
-            Apellidos: <input type="text" name="appell"><br>
-            DNI: <input type="text" name="dni"><br>
-            Dirección: <input type="text" name="address"><br>
-            <input type="submit" value="Registrar"> <input type="reset" value="Borrar datos">
-        </form>
+        <div class="col_w450" style="margin-left: 40%; margin-right: 0px;">
+            <div id="register_user_form">
+                <form action="register" method="POST">
+                    <label for="name">Nombre:</label>
+                    <input type="text" name="name" class="required input_field" id="name"/>
+                    <div class="cleaner_h10"></div>
+                    <label for="appell">Apellidos:</label>
+                    <input type="text" name="appell" class="required input_field" id="appell"/>
+                    <div class="cleaner_h10"></div>
+                    <label for="dni">DNI:</label>
+                    <input type="text" name="dni" class="required input_field" id="dni"/>
+                    <div class="cleaner_h10"></div>
+                    <label for="address">Dirección:</label>
+                    <input type="text" name="address" class="required input_field" id="address"/>
+                    <div class="cleaner_h10"></div>
+                    <input type="submit" value="Registrar" class="submit_btn float_l">
+                    <input type="reset" value="Borrar datos" class="submit_btn float_l">
+                    <input type="submit" value="Registrar"> <input type="reset" value="Borrar datos">
+                </form>
+            </div>
+        </div>
         <%
             } else {
                 response.sendRedirect(getServletContext().getContextPath() + "/index");

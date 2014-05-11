@@ -29,4 +29,11 @@ public class TUsersFacade extends AbstractFacade<TUsers> {
         super(TUsers.class);
     }
     
+    public TUsers findById(int id){
+        return em.createNamedQuery("TUsers.findById", TUsers.class).getSingleResult();
+    }
+    
+    public TUsers findByUsername(String username){
+        return em.createNamedQuery("TUsers.findByUsername", TUsers.class).getSingleResult();
+    }
 }
