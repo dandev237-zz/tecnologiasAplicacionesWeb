@@ -4,8 +4,7 @@
     Author     : infernage
 --%>
 
-<%@page import="proyectotaw.entity.TUsers"%>
-<%@page import="proyectotaw.entity.TRoles"%>
+<%@page import="proyectotaw.entity.Tusers"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,17 +14,9 @@
     </head>
     <body>
         <%
-            TUsers user = (TUsers) request.getSession().getAttribute("user");
+            Tusers user = (Tusers) request.getSession().getAttribute("user");
             if (user == null){
                 response.sendRedirect(getServletContext().getContextPath() + "/index");
-                return;
-            }
-            TRoles rol = user.getRol();
-            if (rol.getId() == 0){
-                getServletContext().getRequestDispatcher("/menuA.jsp").forward(request, response);
-                return;
-            } else if (rol.getId() == 1){
-                getServletContext().getRequestDispatcher("/menuM.jsp").forward(request, response);
                 return;
             }
         %><br>Nombre:

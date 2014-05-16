@@ -4,9 +4,7 @@
     Author     : infernage
 --%>
 
-<%@page import="proyectotaw.ejb.TRolesFacade"%>
-<%@page import="proyectotaw.entity.TRoles"%>
-<%@page import="proyectotaw.entity.TUsers"%>
+<%@page import="proyectotaw.entity.Tusers"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,7 +15,7 @@
     </head>
     <body>
         <%
-            TUsers user = (TUsers) request.getSession().getAttribute("user");
+            Tusers user = (Tusers) request.getSession().getAttribute("user");
             if (user == null) {
                 response.sendRedirect(getServletContext().getContextPath() + "/index");
                 return;
@@ -70,7 +68,6 @@
                     <div class="cleaner_h10"></div>
                     <input type="submit" value="Registrar" class="submit_btn float_l">
                     <input type="reset" value="Borrar datos" class="submit_btn float_l">
-                    <input type="submit" value="Registrar"> <input type="reset" value="Borrar datos">
                 </form>
             </div>
         </div>

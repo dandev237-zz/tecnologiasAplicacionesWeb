@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import proyectotaw.ejb.TUsersFacade;
-import proyectotaw.entity.TUsers;
+import proyectotaw.ejb.TusersFacadeLocal;
+import proyectotaw.entity.Tusers;
 
 /**
  *
@@ -23,9 +23,9 @@ import proyectotaw.entity.TUsers;
  */
 @WebServlet(name = "AuthenticatorServlet", urlPatterns = {"/auth"})
 public class AuthenticatorServlet extends HttpServlet {
-
     @EJB
-    private TUsersFacade tusersFacade;
+    private TusersFacadeLocal tusersFacade;
+
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,14 +46,7 @@ public class AuthenticatorServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/error.jsp").forward(request, response);
             return;
         }
-        List<TUsers> users = tusersFacade.findAll();
-        TUsers user = null;
-        for (TUsers tusers : users) {
-            if (tusers.getUsername().equals(username)) {
-                user = tusers;
-                break;
-            }
-        }
+        Tusers user = tusersFacade.findByDni(username);
         if (user == null) {
             request.setAttribute("cause", "The username " + username + " is not registered");
             request.setAttribute("error", "Username not found");
@@ -70,8 +63,16 @@ public class AuthenticatorServlet extends HttpServlet {
         }
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/menu.jsp");
-        rd.forward(request, response);
+        switch(user.getRol().getId()){
+            case 0: getServletContext().getRequestDispatcher("/menuA.jsp").forward(request, response);
+                break;
+            case 1: getServletContext().getRequestDispatcher("/menuM.jsp").forward(request, response);
+                break;
+            case 2: getServletContext().getRequestDispatcher("/menu.jsp").forward(request, response);
+                break;
+            default: getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+                break;
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -6,16 +6,18 @@
 package proyectotaw.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.security.SecureRandom;
+import java.util.UUID;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import proyectotaw.ejb.TUsersFacade;
-import proyectotaw.entity.TRoles;
-import proyectotaw.entity.TUsers;
+import proyectotaw.ejb.TusersFacadeLocal;
+import proyectotaw.entity.Troles;
+import proyectotaw.entity.Tusers;
 
 /**
  *
@@ -23,9 +25,9 @@ import proyectotaw.entity.TUsers;
  */
 @WebServlet(name = "RegisterServlet", urlPatterns = {"/register"})
 public class RegisterServlet extends HttpServlet {
-
     @EJB
-    private TUsersFacade tUsersFacade;
+    private TusersFacadeLocal tusersFacade;
+
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,28 +40,24 @@ public class RegisterServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        TUsers user = (TUsers) request.getSession().getAttribute("user");
+        Tusers user = (Tusers) request.getSession().getAttribute("user");
         if (user != null && (user.getRol().getId() == 0 || user.getRol().getId() == 1)) {
             String name = (String) request.getParameter("name"),
                     appell = (String) request.getParameter("appell"),
                     dni = (String) request.getParameter("dni"),
-                    addr = (String) request.getParameter("address");
-            System.out.println(name);
-            System.out.println(appell);
-            System.out.println(dni);
-            System.out.println(addr);
+                    addr = (String) request.getParameter("address"),
+                    nuhsa = UUID.randomUUID().toString();
             if (name != null && appell != null && dni != null && addr != null) {
-                TUsers register = new TUsers(tUsersFacade.count());
-                register.setRol(new TRoles(request.getParameter("type") == null ? 2
+                Tusers register = new Tusers();
+                register.setRol(new Troles(request.getParameter("type") == null ? 2
                         : request.getParameter("type").equals("admin") ? 0
                         : request.getParameter("type").equals("medic") ? 1 : 2));
                 register.setName(name + " " + appell);
                 register.setAddress(addr);
                 register.setDni(dni);
-                register.setUsername(dni);
-                register.setPassword(name + "_" + dni);
-                register.setNuhsa("");
-                tUsersFacade.create(register);
+                register.setPassword(dni);
+                register.setNuhsa(nuhsa);
+                tusersFacade.create(register);
                 response.sendRedirect(getServletContext().getContextPath() + "/menu.jsp");
             } else {
                 request.setAttribute("cause", "Some fields aren't filled.");

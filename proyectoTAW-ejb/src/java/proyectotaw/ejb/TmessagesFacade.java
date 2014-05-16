@@ -9,14 +9,14 @@ package proyectotaw.ejb;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import proyectotaw.entity.TPatientInfo;
+import proyectotaw.entity.Tmessages;
 
 /**
  *
- * @author infernage
+ * @author Alberto
  */
 @Stateless
-public class TPatientInfoFacade extends AbstractFacade<TPatientInfo> {
+public class TmessagesFacade extends AbstractFacade<Tmessages> implements TmessagesFacadeLocal {
     @PersistenceContext(unitName = "proyectoTAW-ejbPU")
     private EntityManager em;
 
@@ -25,8 +25,8 @@ public class TPatientInfoFacade extends AbstractFacade<TPatientInfo> {
         return em;
     }
 
-    public TPatientInfoFacade() {
-        super(TPatientInfo.class);
+    public TmessagesFacade() {
+        super(Tmessages.class);
     }
     
 }

@@ -4,7 +4,7 @@
     Author     : infernage
 --%>
 
-<%@page import="proyectotaw.entity.TUsers"%>
+<%@page import="proyectotaw.entity.Tusers"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,11 +13,10 @@
         <title></title>
     </head>
     <%
-        TUsers user = (TUsers) session.getAttribute("user");
-        if (user != null){
-            session.removeAttribute("user");
+        Tusers user = (Tusers) session.getAttribute("user");
+        if (user != null) {
             session.invalidate();
         }
         response.sendRedirect(getServletContext().getContextPath() + "/index");
-        %>
+    %>
 </html>

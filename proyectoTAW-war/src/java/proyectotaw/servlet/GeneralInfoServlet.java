@@ -16,10 +16,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import proyectotaw.ejb.TInfoFacade;
-import proyectotaw.entity.TInfo;
-import proyectotaw.entity.TPatientInfo;
-import proyectotaw.entity.TUsers;
+import proyectotaw.ejb.TinfoextraFacadeLocal;
+import proyectotaw.entity.Tinfoextra;
+import proyectotaw.entity.Tusers;
 
 /**
  *
@@ -27,9 +26,9 @@ import proyectotaw.entity.TUsers;
  */
 @WebServlet(name = "GeneralInfoServlet", urlPatterns = {"/GeneralInfoServlet"})
 public class GeneralInfoServlet extends HttpServlet {
-
     @EJB
-    private TInfoFacade tInfoFacade;
+    private TinfoextraFacadeLocal tinfoextraFacade;
+
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,29 +42,13 @@ public class GeneralInfoServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        TUsers user = (TUsers) request.getSession().getAttribute("user");
+        Tusers user = (Tusers) request.getSession().getAttribute("user");
         if (user == null){
             request.getRequestDispatcher("/index").forward(request, response);
             return;
         }
-        int id = user.getId();
-        List<TInfo> lista = tInfoFacade.findAll();
-        List<TInfo> listaProcesada = new ArrayList<>();
-        for (TInfo t : lista) {
-            TPatientInfo info = t.getTPatientInfo();
-            if (info != null && info.getId() == id){
-                listaProcesada.add(t);
-            }
-        }
-        List<Integer> tipos = new ArrayList<>();
-        for (TInfo t : listaProcesada) {
-            if (!tipos.contains(t.getType())) {
-                tipos.add(t.getType());
-            }
-        }
-        Collections.sort(tipos);
-        request.setAttribute("tipos", tipos);
-        request.setAttribute("lista", listaProcesada);
+        List<Tinfoextra> lista = tinfoextraFacade.findByUserId(user);
+        request.setAttribute("lista", lista);
 
         RequestDispatcher rd;
 

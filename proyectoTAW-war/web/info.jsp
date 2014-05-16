@@ -4,19 +4,17 @@
     Author     : Fco Javier
 --%>
 
+<%@page import="proyectotaw.entity.Tinfoextra"%>
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="proyectotaw.entity.TInfo"%>
 <%@page import="java.util.List"%>
-<%@page import="proyectotaw.entity.TUsers"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <%
-            List<Integer> tipos = (List<Integer>) request.getAttribute("tipos");
-            List<TInfo> listaProcesada = (List<TInfo>) request.getAttribute("lista");
-            if (tipos == null || listaProcesada == null){
+            List<Tinfoextra> listaProcesada = (List<Tinfoextra>) request.getAttribute("lista");
+            if (listaProcesada == null) {
                 response.sendRedirect(getServletContext().getContextPath() + "/index");
                 return;
             }
@@ -26,19 +24,15 @@
     </head>
     <body>
         <h1>Información extra personalizada</h1>
-        <% for (int i : tipos) { %>
         <table> 
-            <% for (TInfo t : listaProcesada) {
-                    if (t.getType() == i) {
+            <% for (Tinfoextra t : listaProcesada) {
             %>
             <tr>
-                <td> <%=t.getDate()%></td>
+                <td> <%=t.getType()%></td>
                 <td> <%=t.getDescription()%></td>
 
             </tr>
-            <%}
-                }%>
+            <%}%>
         </table>
-        <%}%>
     </body>
 </html>

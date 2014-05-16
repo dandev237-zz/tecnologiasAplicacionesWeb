@@ -9,14 +9,14 @@ package proyectotaw.ejb;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import proyectotaw.entity.TInfo;
+import proyectotaw.entity.Troles;
 
 /**
  *
- * @author infernage
+ * @author Alberto
  */
 @Stateless
-public class TInfoFacade extends AbstractFacade<TInfo> {
+public class TrolesFacade extends AbstractFacade<Troles> implements TrolesFacadeLocal {
     @PersistenceContext(unitName = "proyectoTAW-ejbPU")
     private EntityManager em;
 
@@ -25,8 +25,18 @@ public class TInfoFacade extends AbstractFacade<TInfo> {
         return em;
     }
 
-    public TInfoFacade() {
-        super(TInfo.class);
+    public TrolesFacade() {
+        super(Troles.class);
+    }
+
+    @Override
+    public Troles findById(int id) {
+        return em.createNamedQuery("Troles.findById", Troles.class).getSingleResult();
+    }
+
+    @Override
+    public Troles findByName(String name) {
+        return em.createNamedQuery("Troles.findByName", Troles.class).getSingleResult();
     }
     
 }

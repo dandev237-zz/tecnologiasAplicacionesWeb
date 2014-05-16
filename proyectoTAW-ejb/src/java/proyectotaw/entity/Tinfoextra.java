@@ -7,40 +7,39 @@
 package proyectotaw.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author infernage
+ * @author Alberto
  */
 @Entity
-@Table(name = "tInfo")
+@Table(name = "tinfoextra")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TInfo.findAll", query = "SELECT t FROM TInfo t"),
-    @NamedQuery(name = "TInfo.findById", query = "SELECT t FROM TInfo t WHERE t.id = :id"),
-    @NamedQuery(name = "TInfo.findByType", query = "SELECT t FROM TInfo t WHERE t.type = :type"),
-    @NamedQuery(name = "TInfo.findByDate", query = "SELECT t FROM TInfo t WHERE t.date = :date"),
-    @NamedQuery(name = "TInfo.findByDescription", query = "SELECT t FROM TInfo t WHERE t.description = :description")})
-public class TInfo implements Serializable {
+    @NamedQuery(name = "Tinfoextra.findByUserId", query = "SELECT t FROM Tinfoextra t WHERE t.userId.id = :id"),
+    @NamedQuery(name = "Tinfoextra.findAll", query = "SELECT t FROM Tinfoextra t"),
+    @NamedQuery(name = "Tinfoextra.findById", query = "SELECT t FROM Tinfoextra t WHERE t.id = :id"),
+    @NamedQuery(name = "Tinfoextra.findByType", query = "SELECT t FROM Tinfoextra t WHERE t.type = :type"),
+    @NamedQuery(name = "Tinfoextra.findByDescription", query = "SELECT t FROM Tinfoextra t WHERE t.description = :description")})
+public class Tinfoextra implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
@@ -49,26 +48,24 @@ public class TInfo implements Serializable {
     private int type;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
-    @Size(max = 90)
+    @Size(min = 1, max = 45)
     @Column(name = "description")
     private String description;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "tInfo")
-    private TPatientInfo tPatientInfo;
+    @JoinColumn(name = "userId", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Tusers userId;
 
-    public TInfo() {
+    public Tinfoextra() {
     }
 
-    public TInfo(Integer id) {
+    public Tinfoextra(Integer id) {
         this.id = id;
     }
 
-    public TInfo(Integer id, int type, Date date) {
+    public Tinfoextra(Integer id, int type, String description) {
         this.id = id;
         this.type = type;
-        this.date = date;
+        this.description = description;
     }
 
     public Integer getId() {
@@ -87,14 +84,6 @@ public class TInfo implements Serializable {
         this.type = type;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -103,12 +92,12 @@ public class TInfo implements Serializable {
         this.description = description;
     }
 
-    public TPatientInfo getTPatientInfo() {
-        return tPatientInfo;
+    public Tusers getUserId() {
+        return userId;
     }
 
-    public void setTPatientInfo(TPatientInfo tPatientInfo) {
-        this.tPatientInfo = tPatientInfo;
+    public void setUserId(Tusers userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -121,10 +110,10 @@ public class TInfo implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TInfo)) {
+        if (!(object instanceof Tinfoextra)) {
             return false;
         }
-        TInfo other = (TInfo) object;
+        Tinfoextra other = (Tinfoextra) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -133,7 +122,7 @@ public class TInfo implements Serializable {
 
     @Override
     public String toString() {
-        return "proyectotaw.entity.TInfo[ id=" + id + " ]";
+        return "proyectotaw.entity.Tinfoextra[ id=" + id + " ]";
     }
     
 }
