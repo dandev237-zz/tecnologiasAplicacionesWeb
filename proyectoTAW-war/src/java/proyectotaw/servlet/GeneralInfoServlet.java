@@ -6,8 +6,6 @@
 package proyectotaw.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -24,7 +22,7 @@ import proyectotaw.entity.Tusers;
  *
  * @author Fco Javier
  */
-@WebServlet(name = "GeneralInfoServlet", urlPatterns = {"/GeneralInfoServlet"})
+@WebServlet(name = "GeneralInfoServlet", urlPatterns = {"/info"})
 public class GeneralInfoServlet extends HttpServlet {
     @EJB
     private TinfoextraFacadeLocal tinfoextraFacade;
@@ -44,7 +42,7 @@ public class GeneralInfoServlet extends HttpServlet {
 
         Tusers user = (Tusers) request.getSession().getAttribute("user");
         if (user == null){
-            request.getRequestDispatcher("/index").forward(request, response);
+            response.sendRedirect(getServletContext().getContextPath() + "/index");
             return;
         }
         List<Tinfoextra> lista = tinfoextraFacade.findByUserId(user);

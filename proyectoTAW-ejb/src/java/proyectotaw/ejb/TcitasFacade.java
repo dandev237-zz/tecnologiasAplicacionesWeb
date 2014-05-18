@@ -6,6 +6,7 @@
 
 package proyectotaw.ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,12 @@ public class TcitasFacade extends AbstractFacade<Tcitas> implements TcitasFacade
 
     public TcitasFacade() {
         super(Tcitas.class);
+    }
+
+    @Override
+    public List<Tcitas> findByUserId(int id) {
+        return em.createNamedQuery("Tcitas.findByUserId", Tcitas.class).setParameter("id", id)
+                .getResultList();
     }
     
 }

@@ -63,16 +63,7 @@ public class AuthenticatorServlet extends HttpServlet {
         }
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
-        switch(user.getRol().getId()){
-            case 0: getServletContext().getRequestDispatcher("/menuA.jsp").forward(request, response);
-                break;
-            case 1: getServletContext().getRequestDispatcher("/menuM.jsp").forward(request, response);
-                break;
-            case 2: getServletContext().getRequestDispatcher("/menu.jsp").forward(request, response);
-                break;
-            default: getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
-                break;
-        }
+        getServletContext().getRequestDispatcher("/menu").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

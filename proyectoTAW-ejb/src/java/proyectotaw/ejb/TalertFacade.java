@@ -7,6 +7,7 @@
 package proyectotaw.ejb;
 
 import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -42,5 +43,10 @@ public class TalertFacade extends AbstractFacade<Talert> implements TalertFacade
         create(alert);
         em.getTransaction().commit();
     }
-    
+
+    @Override
+    public List<Talert> findByUserId(int id) {
+        return em.createNamedQuery("Talert.findByUserId", Talert.class).setParameter("id", id)
+                .getResultList();
+    }    
 }

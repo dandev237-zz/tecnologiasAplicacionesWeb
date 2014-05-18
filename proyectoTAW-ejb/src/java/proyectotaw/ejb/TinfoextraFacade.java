@@ -33,7 +33,7 @@ public class TinfoextraFacade extends AbstractFacade<Tinfoextra> implements Tinf
 
     @Override
     public List<Tinfoextra> findByUserId(Tusers user) {
-        return em.createNamedQuery("Tinfoextra.findByUser", Tinfoextra.class)
+        return em.createNamedQuery("Tinfoextra.findByUserId", Tinfoextra.class)
                 .setParameter("id", user.getId()).getResultList();
     }
     

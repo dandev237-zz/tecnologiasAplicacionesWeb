@@ -31,4 +31,5 @@ public interface TcitasFacadeLocal {
 
     int count();
     
+    List<Tcitas> findByUserId(int id);
 }

@@ -15,9 +15,9 @@
         <form action="send" method="POST">
             <label for="nuhsa">Nuhsa del paciente:</label>
             <input type="text" name="nuhsa"/>
-            <label for="title">Titulo:</label>
+            <label for="title">Título:</label>
             <input type="text" name="title"/>
-            <label for="description">Descripcion:</label>
+            <label for="description">Descripción:</label>
             <br>
             <textarea name="description" rows="10" cols="30"></textarea>
             <input type="submit" value="Enviar">

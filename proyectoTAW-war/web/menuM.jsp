@@ -13,7 +13,6 @@
         <title>Menu médico</title>
     </head>
     <body>
-        <a href="menuM.jsp"></a>
         <%
             Tusers user = (Tusers) request.getSession().getAttribute("user");
             if (user == null){
@@ -28,7 +27,7 @@
         <table>
             <tr>
                 <td><form action="newUser.jsp"><button>Registrar usuario</button></form></td>
-                <td><form action="alert"><button>Enviar alertas</button></form></td>
+                <td><form action="sendAlert.jsp"><button>Enviar alertas</button></form></td>
             </tr>
             <tr>
                 <td><form action="date"><button>Crear aviso de cita</button></form></td>

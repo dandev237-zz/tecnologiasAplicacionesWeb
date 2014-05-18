@@ -3,21 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package proyectotaw.servlet;
 
 import java.io.IOException;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import proyectotaw.ejb.TalertFacadeLocal;
+import proyectotaw.ejb.TcitasFacadeLocal;
+import proyectotaw.entity.Talert;
+import proyectotaw.entity.Tcitas;
+import proyectotaw.entity.Tusers;
 
 /**
  *
- * @author infernage
+ * @author Alberto
  */
-@WebServlet(name = "IndexServlet", urlPatterns = {"/index"})
-public class IndexServlet extends HttpServlet {
+@WebServlet(name = "AlertDateServlet", urlPatterns = {"/showAlertsDates"})
+public class AlertDateServlet extends HttpServlet {
+    @EJB
+    private TcitasFacadeLocal tcitasFacade;
+    @EJB
+    private TalertFacadeLocal talertFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,15 +42,16 @@ public class IndexServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getSession(true).isNew()) {
-            getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
-        } else {
-            if (request.getSession().getAttribute("user") != null) {
-                getServletContext().getRequestDispatcher("/menu").forward(request, response);
-            } else{
-                getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
-            }
+        Tusers user = (Tusers) request.getSession().getAttribute("user");
+        if (user == null){
+            response.sendRedirect(getServletContext().getContextPath() + "/index");
+            return;
         }
+        List<Talert> alerts = talertFacade.findByUserId(user.getId());
+        List<Tcitas> dates = tcitasFacade.findByUserId(user.getId());
+        request.setAttribute("alerts", alerts);
+        request.setAttribute("dates", dates);
+        getServletContext().getRequestDispatcher("/showAlertsADates.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

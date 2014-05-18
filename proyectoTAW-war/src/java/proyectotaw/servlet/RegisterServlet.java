@@ -58,7 +58,7 @@ public class RegisterServlet extends HttpServlet {
                 register.setPassword(dni);
                 register.setNuhsa(nuhsa);
                 tusersFacade.create(register);
-                response.sendRedirect(getServletContext().getContextPath() + "/menu.jsp");
+                response.sendRedirect(getServletContext().getContextPath() + "/menu");
             } else {
                 request.setAttribute("cause", "Some fields aren't filled.");
                 request.setAttribute("error", "NullPointerException");

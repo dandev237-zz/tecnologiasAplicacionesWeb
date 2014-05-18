@@ -6,18 +6,20 @@
 package proyectotaw.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import proyectotaw.entity.Tusers;
 
 /**
  *
- * @author infernage
+ * @author Alberto
  */
-@WebServlet(name = "IndexServlet", urlPatterns = {"/index"})
-public class IndexServlet extends HttpServlet {
+@WebServlet(name = "MenuRedirector", urlPatterns = {"/menu"})
+public class MenuRedirector extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,14 +32,24 @@ public class IndexServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getSession(true).isNew()) {
-            getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
-        } else {
-            if (request.getSession().getAttribute("user") != null) {
-                getServletContext().getRequestDispatcher("/menu").forward(request, response);
-            } else{
-                getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+        Tusers user = (Tusers) request.getSession().getAttribute("user");
+        if (user != null) {
+            switch (user.getRol().getId()) {
+                case 0:
+                    getServletContext().getRequestDispatcher("/menuA.jsp").forward(request, response);
+                    break;
+                case 1:
+                    getServletContext().getRequestDispatcher("/menuM.jsp").forward(request, response);
+                    break;
+                case 2:
+                    getServletContext().getRequestDispatcher("/menu.jsp").forward(request, response);
+                    break;
+                default:
+                    getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+                    break;
             }
+        } else{
+            response.sendRedirect(getServletContext().getContextPath() + "/index");
         }
     }
 

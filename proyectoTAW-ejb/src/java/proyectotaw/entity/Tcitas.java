@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "tcitas")
 @XmlRootElement
 @NamedQueries({
+    @NamedQuery(name = "Tcitas.findByUserId", query = "SELECT t FROM Tcitas t WHERE t.tuserDate.id = :id"),
     @NamedQuery(name = "Tcitas.findAll", query = "SELECT t FROM Tcitas t"),
     @NamedQuery(name = "Tcitas.findById", query = "SELECT t FROM Tcitas t WHERE t.id = :id"),
     @NamedQuery(name = "Tcitas.findByDate", query = "SELECT t FROM Tcitas t WHERE t.date = :date"),

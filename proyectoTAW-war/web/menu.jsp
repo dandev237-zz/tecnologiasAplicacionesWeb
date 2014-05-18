@@ -19,8 +19,8 @@
                 response.sendRedirect(getServletContext().getContextPath() + "/index");
                 return;
             }
-        %><br>Nombre:
-        <%=user.getName()%><br>NUHSA:<%=user.getNuhsa()%>
+        %><br>Nombre: <%=user.getName()%>
+        <br>NUHSA: <%=user.getNuhsa()%>
         <table>
             <tr>
                 <th>Consultar</th>
@@ -47,7 +47,7 @@
                     </form></td>
             </tr>
             <tr>
-                <td><form action="GeneralInfoServlet">
+                <td><form action="info">
                         <input type="submit" value="Información personalizada"
                                style="width: 240px;">
                     </form></td>
@@ -69,6 +69,11 @@
                 <td><form action="location?action=location" method="GET">
                         <input type="submit" value="Localización personal"
                                style="width: 240px;">
+                    </form></td>
+            </tr>
+            <tr>
+                <td><form action="showAlertsDates" method="GET">
+                        <input type="submit" value="Consultar información de citas/alertas">
                     </form></td>
             </tr>
         </table>

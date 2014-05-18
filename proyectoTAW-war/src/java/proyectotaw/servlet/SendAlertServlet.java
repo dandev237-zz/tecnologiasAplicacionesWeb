@@ -6,7 +6,6 @@
 package proyectotaw.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +21,7 @@ import proyectotaw.entity.Tusers;
  *
  * @author Fco Javier
  */
-@WebServlet(name = "SendAlertServlet", urlPatterns = {"/SendAlertServlet"})
+@WebServlet(name = "SendAlertServlet", urlPatterns = {"/send"})
 public class SendAlertServlet extends HttpServlet {
 
     @EJB
@@ -45,8 +44,7 @@ public class SendAlertServlet extends HttpServlet {
         String title = request.getParameter("title");
         String importantS = request.getParameter("important");
         String description = request.getParameter("description");
-        boolean important;
-        important = !importantS.equals("");
+        boolean important = (importantS != null);
         if (nuhsa != null && title != null && description != null) {
             Tusers paciente = tusersFacade.findByNuhsa(nuhsa);
 
@@ -56,7 +54,7 @@ public class SendAlertServlet extends HttpServlet {
             alerta.setImportant(important);
             alerta.setTuserAlert(paciente);
             talertFacade.create(alerta);
-            response.sendRedirect("/menu.jsp");
+            response.sendRedirect(getServletContext().getContextPath() + "/menu");
         } else {
             request.setAttribute("cause", "Some fields aren't filled.");
             request.setAttribute("error", "NullPointerException");

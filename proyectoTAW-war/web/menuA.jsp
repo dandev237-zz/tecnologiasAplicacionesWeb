@@ -50,7 +50,7 @@
                     </form></td>
             </tr>
             <tr>
-                <td><form action="GeneralInfoServlet">
+                <td><form action="info">
                         <input type="submit" value="Información personalizada"
                                style="width: 240px;">
                     </form></td>
