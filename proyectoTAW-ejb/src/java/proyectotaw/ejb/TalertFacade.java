@@ -49,4 +49,10 @@ public class TalertFacade extends AbstractFacade<Talert> implements TalertFacade
         return em.createNamedQuery("Talert.findByUserId", Talert.class).setParameter("id", id)
                 .getResultList();
     }    
+
+    @Override
+    public Talert findById(int id) {
+        return em.createNamedQuery("Talert.findById", Talert.class).setParameter("id", id)
+                .getSingleResult();
+    }
 }

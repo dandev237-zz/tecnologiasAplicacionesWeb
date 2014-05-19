@@ -36,4 +36,6 @@ public interface TalertFacadeLocal {
     void insertAlert(boolean important, String description, String title, Tusers user);
     
     List<Talert> findByUserId(int id);
+    
+    Talert findById(int id);
 }

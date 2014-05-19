@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Modificar alertas</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            Introduce el NUHSA del paciente: 
+            <h:inputText id="nuhsa" value="#{modifyAlert.nuhsa}"/>
+            <h:commandButton value="Buscar" action="#{modifyAlert.findByNuhsa}">
+                <f:ajax execute="nuhsa" render="alerts"/>
+            </h:commandButton>
+            <br/>
+            <h:dataTable id="alerts"
+                         value="#{modifyAlert.alerts}"
+                         var="alert">
+                <h:column>
+                    <f:facet name="header">Título</f:facet>
+                    <h:inputText id="title" value="#{alert.title}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Descripción</f:facet>
+                    <h:inputTextarea id="description" value="#{alert.description}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Importante</f:facet>
+                    <h:selectBooleanCheckbox id="important" value="#{alert.important}"/>
+                </h:column>
+            </h:dataTable>
+            <br/>
+            <h:commandButton value="Modificar" action="#{modifyAlert.save}"/>
+        </h:form>
+    </h:body>
+</html>

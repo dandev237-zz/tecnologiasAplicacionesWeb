@@ -28,16 +28,14 @@
         <table border="1">
             <tr>
                 <th>Título</th>
-                <th>¿Importante?</th>
-                <th>Descripción</th>
+                <th>Más detalles</th>
             </tr>
             <%
                 for (Talert alert : alerts) {
             %>
             <tr>
                 <td><%=alert.getTitle()%></td>
-                <td><%=(alert.getImportant() ? "Importante" : "No importante")%></td>
-                <td><%=alert.getDescription()%></td>
+                <td><a href="showAlertsDates?alert=<%=alert.getId()%>">Mostrar</a></td>
             </tr>
             <%
                 }
@@ -49,16 +47,14 @@
         <table border="1">
             <tr>
                 <th>Fecha</th>
-                <th>¿Importante?</th>
-                <th>Descripción</th>
+                <th>Más detalles</th>
             </tr>
             <%
                 for (Tcitas date : dates) {
             %>
             <tr>
                 <td><%=date.getDate().toString()%></td>
-                <td><%=(date.getImportant() ? "Importante" : "No importante")%></td>
-                <td><%=date.getDescription()%></td>
+                <td><a href="showAlertsDates?date=<%=date.getId()%>">Mostrar</a></td>
             </tr>
             <%
                 }

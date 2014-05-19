@@ -28,6 +28,7 @@
             <tr>
                 <td><form action="newUser.jsp"><button>Registrar usuario</button></form></td>
                 <td><form action="sendAlert.jsp"><button>Enviar alertas</button></form></td>
+                <td><form action="modifyAlert.jsf"><button>Modificar alertas</button></form></td>
             </tr>
             <tr>
                 <td><form action="date"><button>Crear aviso de cita</button></form></td>

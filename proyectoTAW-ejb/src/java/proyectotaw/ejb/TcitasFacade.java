@@ -35,5 +35,11 @@ public class TcitasFacade extends AbstractFacade<Tcitas> implements TcitasFacade
         return em.createNamedQuery("Tcitas.findByUserId", Tcitas.class).setParameter("id", id)
                 .getResultList();
     }
+
+    @Override
+    public Tcitas findById(int id) {
+        return em.createNamedQuery("Tcitas.findById", Tcitas.class).setParameter("id", id)
+                .getSingleResult();
+    }
     
 }

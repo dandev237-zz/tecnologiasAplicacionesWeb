@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package proyectotaw.servlet;
 
 import java.io.IOException;
@@ -26,6 +25,7 @@ import proyectotaw.entity.Tusers;
  */
 @WebServlet(name = "AlertDateServlet", urlPatterns = {"/showAlertsDates"})
 public class AlertDateServlet extends HttpServlet {
+
     @EJB
     private TcitasFacadeLocal tcitasFacade;
     @EJB
@@ -43,15 +43,28 @@ public class AlertDateServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Tusers user = (Tusers) request.getSession().getAttribute("user");
-        if (user == null){
+        if (user == null) {
             response.sendRedirect(getServletContext().getContextPath() + "/index");
             return;
         }
-        List<Talert> alerts = talertFacade.findByUserId(user.getId());
-        List<Tcitas> dates = tcitasFacade.findByUserId(user.getId());
-        request.setAttribute("alerts", alerts);
-        request.setAttribute("dates", dates);
-        getServletContext().getRequestDispatcher("/showAlertsADates.jsp").forward(request, response);
+        String query = request.getQueryString();
+        if (query == null || query.isEmpty()) {
+            List<Talert> alerts = talertFacade.findByUserId(user.getId());
+            List<Tcitas> dates = tcitasFacade.findByUserId(user.getId());
+            request.setAttribute("alerts", alerts);
+            request.setAttribute("dates", dates);
+            getServletContext().getRequestDispatcher("/showAlertsADates.jsp").forward(request, response);
+        } else{
+            switch(query.split("=")[0]){
+                case "alert": request.setAttribute("alert", talertFacade
+                        .findById(Integer.parseInt(query.split("=")[1])));
+                    break;
+                case "date": request.setAttribute("date", tcitasFacade.findById(Integer
+                        .parseInt(query.split("=")[1])));
+                    break;
+            }
+            getServletContext().getRequestDispatcher("/showInfoDateAlert.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
