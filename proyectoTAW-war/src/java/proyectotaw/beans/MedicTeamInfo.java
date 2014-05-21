@@ -27,7 +27,7 @@ public class MedicTeamInfo {
     private TusersFacadeLocal tusersFacade;
     List<Tusers> medics = new ArrayList<>(((Tusers) 
             ((HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false))
-                    .getAttribute("user")).getTusersCollection()); 
+                    .getAttribute("user")).getTusersCollection1()); 
 
     public List<Tusers> getMedics() {
         return medics;

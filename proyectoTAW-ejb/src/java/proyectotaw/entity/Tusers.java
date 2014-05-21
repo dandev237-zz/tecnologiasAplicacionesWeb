@@ -16,6 +16,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -71,15 +73,17 @@ public class Tusers implements Serializable {
     @Size(max = 45)
     @Column(name = "address")
     private String address;
+    @JoinTable(name = "tusers_has_tusers", joinColumns = {
+        @JoinColumn(name = "medicId", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "patientId", referencedColumnName = "id")})
+    @ManyToMany
+    private Collection<Tusers> tusersCollection;
+    @ManyToMany(mappedBy = "tusersCollection")
+    private Collection<Tusers> tusersCollection1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Collection<Tinfoextra> tinfoextraCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tuserDate")
     private Collection<Tcitas> tcitasCollection;
-    @OneToMany(mappedBy = "medicTeam")
-    private Collection<Tusers> tusersCollection;
-    @JoinColumn(name = "medicTeam", referencedColumnName = "id")
-    @ManyToOne
-    private Tusers medicTeam;
     @JoinColumn(name = "rol", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Troles rol;
@@ -152,6 +156,24 @@ public class Tusers implements Serializable {
     }
 
     @XmlTransient
+    public Collection<Tusers> getTusersCollection() {
+        return tusersCollection;
+    }
+
+    public void setTusersCollection(Collection<Tusers> tusersCollection) {
+        this.tusersCollection = tusersCollection;
+    }
+
+    @XmlTransient
+    public Collection<Tusers> getTusersCollection1() {
+        return tusersCollection1;
+    }
+
+    public void setTusersCollection1(Collection<Tusers> tusersCollection1) {
+        this.tusersCollection1 = tusersCollection1;
+    }
+
+    @XmlTransient
     public Collection<Tinfoextra> getTinfoextraCollection() {
         return tinfoextraCollection;
     }
@@ -167,23 +189,6 @@ public class Tusers implements Serializable {
 
     public void setTcitasCollection(Collection<Tcitas> tcitasCollection) {
         this.tcitasCollection = tcitasCollection;
-    }
-
-    @XmlTransient
-    public Collection<Tusers> getTusersCollection() {
-        return tusersCollection;
-    }
-
-    public void setTusersCollection(Collection<Tusers> tusersCollection) {
-        this.tusersCollection = tusersCollection;
-    }
-
-    public Tusers getMedicTeam() {
-        return medicTeam;
-    }
-
-    public void setMedicTeam(Tusers medicTeam) {
-        this.medicTeam = medicTeam;
     }
 
     public Troles getRol() {
