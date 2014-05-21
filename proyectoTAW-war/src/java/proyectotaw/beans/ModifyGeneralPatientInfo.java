@@ -6,10 +6,8 @@
 
 package proyectotaw.beans;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import javax.ejb.EJB;
-import javax.enterprise.context.Dependent;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
@@ -33,14 +31,23 @@ public class ModifyGeneralPatientInfo {
     private String nuhsa;
     private Tusers user;
     private Collection<Tinfoextra> infoExtra;
-    private String descripcionTemporal;
+    private String description;
+    private int type;
 
-    public String getDescripcionTemporal() {
-        return descripcionTemporal;
+    public int getType() {
+        return type;
     }
 
-    public void setDescripcionTemporal(String descripcionTemporal) {
-        this.descripcionTemporal = descripcionTemporal;
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Collection<Tinfoextra> getInfoExtra() {
@@ -50,26 +57,9 @@ public class ModifyGeneralPatientInfo {
     public void setInfoExtra(Collection<Tinfoextra> infoExtra) {
         this.infoExtra = infoExtra;
     }
-
-    public void addInfoExtra()
-    {
-        Tinfoextra t=new Tinfoextra();
-        t.setDescription(descripcionTemporal);
-        t.setType(0);
-        t.setUserId(user);
-        tinfoextraFacade.create(t);
-        infoExtra.add(t);
-    }
-    
-    public void deleteInfoExtra(Tinfoextra t)
-    {
-        infoExtra.remove(t);
-        tinfoextraFacade.remove(t);
-    }
     
     public String getNuhsa() {
         return nuhsa;
-       
     }
 
     public void setNuhsa(String nuhsa) {
@@ -86,18 +76,38 @@ public class ModifyGeneralPatientInfo {
     
     public void findByNuhsa() {
         if (nuhsa != null) {
+            System.out.println("A");
             user = tusersFacade.findByNuhsa(nuhsa); 
             if(user !=null)
             {
+            System.out.println("A");
                 infoExtra=user.getTinfoextraCollection();
             }
         }
     }
-    
-    /**
-     * Creates a new instance of ModifyGeneralPatientInfo
-     */
-    public ModifyGeneralPatientInfo() {
+
+    public void addInfoExtra()
+    {
+        if (user == null || description == null) return;
+        Tinfoextra t=new Tinfoextra();
+        t.setDescription(description);
+        t.setType(0);
+        t.setUserId(user);
+        infoExtra.add(t);
+        tinfoextraFacade.create(t);
+        tusersFacade.edit(user);
     }
     
+    public void modifyInfo(){
+        if (user == null) return;
+        tusersFacade.edit(user);
+    }
+    
+    public void deleteInfoExtra(Tinfoextra t)
+    {
+        if (user == null || description == null) return;
+        infoExtra.remove(t);
+        tinfoextraFacade.remove(t);
+        tusersFacade.edit(user);
+    }
 }
