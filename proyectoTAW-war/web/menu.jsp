@@ -57,7 +57,7 @@
                     </form></td>
             </tr>
             <tr>
-                <td><form>
+                <td><form action="medicTeamInfo.jsf">
                         <input type="submit" value="Equipo médico" style="width: 240px;">
                     </form></td>
                 <td><form>
