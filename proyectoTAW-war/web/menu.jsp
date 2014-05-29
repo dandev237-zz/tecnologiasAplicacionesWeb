@@ -15,7 +15,7 @@
     <body>
         <%
             Tusers user = (Tusers) request.getSession().getAttribute("user");
-            if (user == null){
+            if (user == null) {
                 response.sendRedirect(getServletContext().getContextPath() + "/index");
                 return;
             }
@@ -70,6 +70,8 @@
                         <input type="submit" value="Localización personal"
                                style="width: 240px;">
                     </form></td>
+                <td><form action="sendMessage.jsf" method="GET"><input type="submit" value="Enviar mensaje"
+                                                                   style="width: 240px"></form></td>
             </tr>
             <tr>
                 <td><form action="showAlertsDates" method="GET">
