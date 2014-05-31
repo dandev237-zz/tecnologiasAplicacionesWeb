@@ -6,8 +6,11 @@
 
 package proyectotaw.beans;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.enterprise.context.Dependent;
 import javax.faces.bean.ManagedBean;
@@ -80,5 +83,10 @@ public class FormAction {
             message.setSender(sender.getName());
         }
         tmessagesFacade.create(message);
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("menu.jsp");
+        } catch (IOException ex) {
+            Logger.getLogger(FormAction.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
