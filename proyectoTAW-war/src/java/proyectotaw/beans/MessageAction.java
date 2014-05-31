@@ -86,6 +86,9 @@ public class MessageAction {
     }
     
    
-    
+
+    public void removeMessage(Tmessages message){
+        tmessagesFacade.remove(message);
+    }
     
 }

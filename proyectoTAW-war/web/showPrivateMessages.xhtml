@@ -8,34 +8,41 @@
     </h:head>
     <h:body>
 
+        <h:form>
+            <h:dataTable id="messages" value="#{sessionScope.user.tmessagesCollection}" var="message">
 
-        <h:dataTable id="messages" value="#{sessionScope.user.tmessagesCollection}" var="message">
+                <h:column>
 
-            <h:column>
-
-                <f:facet name="header">Emisor</f:facet>
-                    #{message.sender}
-
-
-            </h:column>
-
-            <h:column>
+                    <f:facet name="header">Emisor</f:facet>
+                        #{message.sender}
 
 
-                <f:facet name="header">T&iacute;tulo</f:facet>
-                    #{message.title}
-            </h:column>
+                </h:column>
 
-            <h:column>
+                <h:column>
 
-                <f:facet name="header">Mensaje</f:facet>
-                    #{message.description}
 
-            </h:column>
+                    <f:facet name="header">T&iacute;tulo</f:facet>
+                        #{message.title}
+                </h:column>
 
-           
-        </h:dataTable>
+                <h:column>
 
+                    <f:facet name="header">Mensaje</f:facet>
+                        #{message.description}
+
+                </h:column>
+
+                <h:column>
+
+                    <f:facet name="header"></f:facet>
+                    <h:commandButton value="Borrar" action="#{messageAction.removeMessage(message)}"></h:commandButton>
+
+                </h:column>
+
+
+            </h:dataTable>
+        </h:form>
 
     </h:body>
 </html>
