@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Random;
 import javax.ejb.EJB;
 import javax.enterprise.context.Dependent;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
@@ -23,7 +25,8 @@ import proyectotaw.entity.Tusers;
  * @author Fco Javier
  */
 @Named(value = "formAction")
-@Dependent
+@ViewScoped
+@ManagedBean
 public class FormAction {
     @EJB
     private TusersFacadeLocal tusersFacade;
