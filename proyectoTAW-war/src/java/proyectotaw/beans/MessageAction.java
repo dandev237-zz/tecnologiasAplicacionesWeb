@@ -3,9 +3,9 @@ package proyectotaw.beans;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.inject.Named;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import proyectotaw.ejb.TmessagesFacadeLocal;
 import proyectotaw.ejb.TusersFacadeLocal;
@@ -28,7 +28,9 @@ public class MessageAction {
     private String dni;
     private String title;
     private String message;
+  
 
+  
     public String getTitle() {
         return title;
     }
@@ -64,10 +66,13 @@ public class MessageAction {
             msg.setUserId(receptor);
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
             if (session != null) {
+                
                 Tusers sender = (Tusers) session.getAttribute("user");
+                
                 if (sender != null) {
                     msg.setSender(sender.getName() + " - " + sender.getDni());
                     tmessagesFacade.create(msg);
+                    
                     context.addMessage(null, new FacesMessage("Mensaje enviado", "Autor: " + msg.getSender()));
                 } else context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al enviar mensaje",
                         "Autor no encontrado. ¿Quizás la sesión ha caducado?"));
@@ -79,4 +84,8 @@ public class MessageAction {
         message = null;
         title = null;
     }
+    
+   
+    
+    
 }

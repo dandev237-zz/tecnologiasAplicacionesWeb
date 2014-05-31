@@ -29,4 +29,6 @@ public class TmessagesFacade extends AbstractFacade<Tmessages> implements Tmessa
         super(Tmessages.class);
     }
     
+   
+    
 }

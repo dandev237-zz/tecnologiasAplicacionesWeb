@@ -75,7 +75,12 @@
             </tr>
             <tr>
                 <td><form action="showAlertsDates" method="GET">
-                        <input type="submit" value="Consultar información de citas/alertas">
+                        <input type="submit" value="Consultar información de citas/alertas" style="width: 240px;">
+                    </form></td>
+            </tr>
+            <tr>
+                <td><form action="showPrivateMessages.jsf" method="GET">
+                        <input type="submit" value="Consultar mensajes privados" style="width: 240px;">
                     </form></td>
             </tr>
         </table>

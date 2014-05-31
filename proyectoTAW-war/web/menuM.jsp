@@ -35,6 +35,10 @@
                 <td><form action="date"><button>Crear aviso de cita</button></form></td>
                 <td><form action="deletedate"><button>Borrar aviso de cita</button></form></td>
                 <td><form action="configGeneralInfo.jsf"><button>Configurar informacion general</button></form></td>
+               
+                <td><form action="showPrivateMessages.jsf"><button>Consultar mensajes privados</button>
+                    </form></td>
+            
             </tr>
         </table>
         <br>

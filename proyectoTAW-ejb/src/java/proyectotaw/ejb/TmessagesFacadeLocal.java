@@ -30,5 +30,6 @@ public interface TmessagesFacadeLocal {
     List<Tmessages> findRange(int[] range);
 
     int count();
+
     
 }
