@@ -9,8 +9,9 @@
     <h:body>
         <h:form>
             Título: <h:inputText id="title" value="#{formAction.title}"/><br/>
-            Contenido: <h:inputTextarea id="description" value="#{formAction.description}"/><br/>
-            Formulario anónimo: <h:selectManyCheckbox id="anom" value="#{formAction.anom}"/>
+            Contenido: <br/><h:inputTextarea id="description" value="#{formAction.description}"/><br/>
+            Formulario anónimo: <h:selectBooleanCheckbox id="anom" value="#{formAction.anom}"/><br/>
+            <h:commandButton value="Enviar" action="#{formAction.sendForm()}"/>
         </h:form>
     </h:body>
 </html>
