@@ -41,7 +41,7 @@
                         <input type="submit" value="Ubicación del hospital"
                                style="width: 240px;">
                     </form></td>
-                <td><form>
+                <td><form action="sendForm.jsf">
                         <input type="submit" value="Enviar formulario de contacto"
                                style="width: 240px;">
                     </form></td>
