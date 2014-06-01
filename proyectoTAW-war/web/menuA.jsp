@@ -74,6 +74,14 @@
                                style="width: 240px;">
                     </form></td>
             </tr>
+            <tr>
+                <td><form action="showForms.jsf">
+                        <input type="submit" value="Consultar Formularios"
+                               style="width: 240px">
+                               
+                            
+                    </form></td>
+            </tr>
         </table>
         <br>
         <form action="newUser.jsp" method="GET">

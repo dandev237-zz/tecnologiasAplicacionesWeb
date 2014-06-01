@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Tmessages.findAll", query = "SELECT t FROM Tmessages t"),
     @NamedQuery(name = "Tmessages.findById", query = "SELECT t FROM Tmessages t WHERE t.id = :id"),
     @NamedQuery(name = "Tmessages.findByTitle", query = "SELECT t FROM Tmessages t WHERE t.title = :title"),
-    @NamedQuery(name = "Tmessages.findBySender", query = "SELECT t FROM Tmessages t WHERE t.sender = :sender")})
+    @NamedQuery(name = "Tmessages.findBySender", query = "SELECT t FROM Tmessages t WHERE t.sender = :sender")}) 
 public class Tmessages implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

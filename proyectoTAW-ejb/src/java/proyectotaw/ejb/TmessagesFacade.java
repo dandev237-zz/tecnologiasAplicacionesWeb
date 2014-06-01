@@ -6,6 +6,7 @@
 
 package proyectotaw.ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,7 +29,5 @@ public class TmessagesFacade extends AbstractFacade<Tmessages> implements Tmessa
     public TmessagesFacade() {
         super(Tmessages.class);
     }
-    
-   
     
 }
