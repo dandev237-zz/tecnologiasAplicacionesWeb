@@ -12,9 +12,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -26,27 +28,46 @@ import proyectotaw.entity.Tmessages;
  * @author Fco Javier
  */
 @Named(value = "showForm")
-@ViewScoped
+@SessionScoped
 @ManagedBean
 public class ShowForm {
     @EJB
     private TmessagesFacadeLocal tmessagesFacade;
-    private List<Tmessages> forms = extractForms();
+    private List<Tmessages> forms;
+    private Tmessages mensaje;
 
+    @PostConstruct
+    public void create(){
+        forms = new ArrayList<>(tmessagesFacade.findByReceiverRol(0));
+    }
+    
+    public String outcome(){
+        FacesContext fc = FacesContext.getCurrentInstance();
+        this.mensaje = tmessagesFacade.findByTitle(obtenerMensaje(fc));
+        
+        return "showFormContent";
+    }
+    
     public List<Tmessages> getForms() {
             return forms;
     }
     
-    public List<Tmessages> extractForms(){
-        List<Tmessages> allMessages = tmessagesFacade.findAll();
-        List<Tmessages> forms = new ArrayList<Tmessages>();
-        
-        for(int i=0;i<allMessages.size();i++){
-            if(allMessages.get(i).getUserId().getRol().getId()==0){
-                forms.add(allMessages.get(i));
-            }
+    public void borrarMensaje(){
+        tmessagesFacade.remove(mensaje);
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("showForms.jsf");
+        } catch (IOException ex) {
+            Logger.getLogger(ShowForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return forms;
     }
+
+    private String obtenerMensaje(FacesContext fc) {
+        return fc.getExternalContext().getRequestParameterMap().get("mensaje");
+    }
+
+    public Tmessages getMensaje() {
+        return mensaje;
+    }
+    
+    
 }

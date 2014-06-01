@@ -28,7 +28,11 @@ public interface TmessagesFacadeLocal {
     List<Tmessages> findAll();
 
     List<Tmessages> findRange(int[] range);
-
+    
+    List<Tmessages> findByReceiverRol(int rol);
+    
+    Tmessages findByTitle(String title);
+    
     int count();
 
     

@@ -29,5 +29,16 @@ public class TmessagesFacade extends AbstractFacade<Tmessages> implements Tmessa
     public TmessagesFacade() {
         super(Tmessages.class);
     }
+
+    @Override
+    public List<Tmessages> findByReceiverRol(int rol) {
+        return em.createNamedQuery("Tmessages.findByReceiverRol", Tmessages.class).setParameter("rol", rol).getResultList();
+    }
+
+    @Override
+    public Tmessages findByTitle(String title) {
+        return em.createNamedQuery("Tmessages.findByTitle", Tmessages.class).setParameter("title", title)
+                .getSingleResult();
+    }
     
 }

@@ -19,14 +19,11 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header"></f:facet>
-                    <h:commandButton value="Mostrar" action="#{form.description}">
-                        <f:ajax event="click" execute="#{form}" render="content"/>
+                    <h:commandButton value="Mostrar" action="#{showForm.outcome()}">
+                        <f:param name="mensaje" value="#{form.title}"/>
                     </h:commandButton>
-                        
                 </h:column>
-                
-            </h:dataTable>
-            <h:outputText id="content" value="#{form.description}"/>
+            </h:dataTable><br/>
         </h:form>
     </h:body>
 </html>
