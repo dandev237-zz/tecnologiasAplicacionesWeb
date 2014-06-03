@@ -19,11 +19,17 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header"></f:facet>
-                    <h:commandButton value="Mostrar" action="#{showForm.outcome()}">
-                        <f:param name="mensaje" value="#{form.title}"/>
+                    <h:commandButton value="Mostrar" action="#{showForm.setTitleAndDescription(form)}">
                     </h:commandButton>
                 </h:column>
             </h:dataTable><br/>
+            <h:form rendered="#{showForm.mostrar}">
+                T&iacute;tulo: <h:outputText value="#{showForm.title}"/><br/>
+                Descripci&oacute;n: <br/><h:outputText value="#{showForm.description}"/><br/>
+               <h:commandButton value="Borrar Formulario" action="#{showForm.borrarMensaje()}">
+                   <f:ajax execute="@this" render="@all"/>
+               </h:commandButton>
+            </h:form>
         </h:form>
     </h:body>
 </html>

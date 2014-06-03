@@ -36,9 +36,9 @@ public class TmessagesFacade extends AbstractFacade<Tmessages> implements Tmessa
     }
 
     @Override
-    public Tmessages findByTitle(String title) {
+    public List<Tmessages> findByTitle(String title) {
         return em.createNamedQuery("Tmessages.findByTitle", Tmessages.class).setParameter("title", title)
-                .getSingleResult();
+                .getResultList();
     }
     
 }

@@ -31,7 +31,7 @@ public interface TmessagesFacadeLocal {
     
     List<Tmessages> findByReceiverRol(int rol);
     
-    Tmessages findByTitle(String title);
+    List<Tmessages> findByTitle(String title);
     
     int count();
 
