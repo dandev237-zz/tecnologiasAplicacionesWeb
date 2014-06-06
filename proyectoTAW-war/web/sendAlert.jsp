@@ -24,5 +24,6 @@
             <input type="reset" value="Borrar">
             <input type="checkbox" name="important" value="Importante">Importante
         </form>
+        <form action="menu" method="GET"><input type="submit" value="Volver"/></form>
     </body>
 </html>

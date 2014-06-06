@@ -34,5 +34,6 @@
             </tr>
             <%}%>
         </table>
+        <form action="menu" method="GET"><input type="submit" value="Volver"/></form>
     </body>
 </html>

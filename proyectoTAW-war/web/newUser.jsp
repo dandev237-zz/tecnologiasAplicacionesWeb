@@ -47,6 +47,7 @@
                     <input type="submit" value="Registrar" class="submit_btn float_l">
                     <input type="reset" value="Borrar datos" class="submit_btn float_l">
                 </form>
+                <form action="menu" method="GET"><input type="submit" value="Volver"/></form>
             </div>
         </div>
         <%                } else if (user.getRol().getId() == 1) {
@@ -69,6 +70,7 @@
                     <input type="submit" value="Registrar" class="submit_btn float_l">
                     <input type="reset" value="Borrar datos" class="submit_btn float_l">
                 </form>
+                <form action="menu" method="GET"><input type="submit" value="Volver"/></form>
             </div>
         </div>
         <%
