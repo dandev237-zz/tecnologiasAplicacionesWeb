@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package proyectotaw.ejb;
 
 import java.util.List;
@@ -14,10 +13,11 @@ import proyectotaw.entity.Tcitas;
 
 /**
  *
- * @author Alberto
+ * @author Fco Javier
  */
 @Stateless
 public class TcitasFacade extends AbstractFacade<Tcitas> implements TcitasFacadeLocal {
+
     @PersistenceContext(unitName = "proyectoTAW-ejbPU")
     private EntityManager em;
 
@@ -31,15 +31,9 @@ public class TcitasFacade extends AbstractFacade<Tcitas> implements TcitasFacade
     }
 
     @Override
-    public List<Tcitas> findByUserId(int id) {
-        return em.createNamedQuery("Tcitas.findByUserId", Tcitas.class).setParameter("id", id)
-                .getResultList();
-    }
-
-    @Override
     public Tcitas findById(int id) {
         return em.createNamedQuery("Tcitas.findById", Tcitas.class).setParameter("id", id)
                 .getSingleResult();
     }
-    
+
 }

@@ -14,7 +14,7 @@ import proyectotaw.entity.Tusers;
 
 /**
  *
- * @author Alberto
+ * @author Fco Javier
  */
 @Stateless
 public class TusersFacade extends AbstractFacade<Tusers> implements TusersFacadeLocal {
@@ -29,12 +29,12 @@ public class TusersFacade extends AbstractFacade<Tusers> implements TusersFacade
     public TusersFacade() {
         super(Tusers.class);
     }
-
+    
     @Override
     public Tusers findById(int id){
         return em.createNamedQuery("Tusers.findById", Tusers.class).setParameter("id", id)
                 .getSingleResult();
-    }
+}
     
     @Override
     public List<Tusers> findByPassword(String password){

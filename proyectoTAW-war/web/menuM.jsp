@@ -32,7 +32,7 @@
                 <td><form action="sendMessage.jsf"><button>Enviar mensaje</button></form></td>
             </tr>
             <tr>
-                <td><form action="date"><button>Crear aviso de cita</button></form></td>
+                <td><form action="createCitas.jsf"><button>Crear aviso de cita</button></form></td>
                 <td><form action="deletedate"><button>Borrar aviso de cita</button></form></td>
                 <td><form action="configGeneralInfo.jsf"><button>Configurar informacion general</button></form></td>
                

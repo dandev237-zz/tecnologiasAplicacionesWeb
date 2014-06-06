@@ -12,7 +12,7 @@ import proyectotaw.entity.Troles;
 
 /**
  *
- * @author Alberto
+ * @author Fco Javier
  */
 @Local
 public interface TrolesFacadeLocal {

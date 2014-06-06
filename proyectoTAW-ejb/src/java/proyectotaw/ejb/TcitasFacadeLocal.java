@@ -12,7 +12,7 @@ import proyectotaw.entity.Tcitas;
 
 /**
  *
- * @author Alberto
+ * @author Fco Javier
  */
 @Local
 public interface TcitasFacadeLocal {
@@ -30,8 +30,6 @@ public interface TcitasFacadeLocal {
     List<Tcitas> findRange(int[] range);
 
     int count();
-    
-    List<Tcitas> findByUserId(int id);
     
     Tcitas findById(int id);
 }

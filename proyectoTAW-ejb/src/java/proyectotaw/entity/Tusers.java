@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Alberto
+ * @author Fco Javier
  */
 @Entity
 @Table(name = "tusers")
@@ -80,10 +80,10 @@ public class Tusers implements Serializable {
     private Collection<Tusers> tusersCollection;
     @ManyToMany(mappedBy = "tusersCollection")
     private Collection<Tusers> tusersCollection1;
+    @ManyToMany(mappedBy = "tusersCollection")
+    private Collection<Tcitas> tcitasCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Collection<Tinfoextra> tinfoextraCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tuserDate")
-    private Collection<Tcitas> tcitasCollection;
     @JoinColumn(name = "rol", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Troles rol;
@@ -174,21 +174,21 @@ public class Tusers implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Tinfoextra> getTinfoextraCollection() {
-        return tinfoextraCollection;
-    }
-
-    public void setTinfoextraCollection(Collection<Tinfoextra> tinfoextraCollection) {
-        this.tinfoextraCollection = tinfoextraCollection;
-    }
-
-    @XmlTransient
     public Collection<Tcitas> getTcitasCollection() {
         return tcitasCollection;
     }
 
     public void setTcitasCollection(Collection<Tcitas> tcitasCollection) {
         this.tcitasCollection = tcitasCollection;
+    }
+
+    @XmlTransient
+    public Collection<Tinfoextra> getTinfoextraCollection() {
+        return tinfoextraCollection;
+    }
+
+    public void setTinfoextraCollection(Collection<Tinfoextra> tinfoextraCollection) {
+        this.tinfoextraCollection = tinfoextraCollection;
     }
 
     public Troles getRol() {

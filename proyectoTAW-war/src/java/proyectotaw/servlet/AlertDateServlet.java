@@ -6,6 +6,7 @@
 package proyectotaw.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -50,7 +51,7 @@ public class AlertDateServlet extends HttpServlet {
         String query = request.getQueryString();
         if (query == null || query.isEmpty()) {
             List<Talert> alerts = talertFacade.findByUserId(user.getId());
-            List<Tcitas> dates = tcitasFacade.findByUserId(user.getId());
+            List<Tcitas> dates = new ArrayList<>(user.getTcitasCollection());
             request.setAttribute("alerts", alerts);
             request.setAttribute("dates", dates);
             getServletContext().getRequestDispatcher("/showAlertsADates.jsp").forward(request, response);

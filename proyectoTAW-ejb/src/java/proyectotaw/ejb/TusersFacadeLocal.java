@@ -12,7 +12,7 @@ import proyectotaw.entity.Tusers;
 
 /**
  *
- * @author Alberto
+ * @author Fco Javier
  */
 @Local
 public interface TusersFacadeLocal {

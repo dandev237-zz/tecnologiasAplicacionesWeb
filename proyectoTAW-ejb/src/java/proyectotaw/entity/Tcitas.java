@@ -7,6 +7,7 @@
 package proyectotaw.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -15,8 +16,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -25,16 +27,16 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Alberto
+ * @author Fco Javier
  */
 @Entity
 @Table(name = "tcitas")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Tcitas.findByUserId", query = "SELECT t FROM Tcitas t WHERE t.tuserDate.id = :id"),
     @NamedQuery(name = "Tcitas.findAll", query = "SELECT t FROM Tcitas t"),
     @NamedQuery(name = "Tcitas.findById", query = "SELECT t FROM Tcitas t WHERE t.id = :id"),
     @NamedQuery(name = "Tcitas.findByDate", query = "SELECT t FROM Tcitas t WHERE t.date = :date"),
@@ -59,9 +61,11 @@ public class Tcitas implements Serializable {
     @Size(max = 65535)
     @Column(name = "description")
     private String description;
-    @JoinColumn(name = "tuserDate", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Tusers tuserDate;
+    @JoinTable(name = "tcitas_has_tusers", joinColumns = {
+        @JoinColumn(name = "tCitas_id", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "tUsers_id", referencedColumnName = "id")})
+    @ManyToMany
+    private Collection<Tusers> tusersCollection;
 
     public Tcitas() {
     }
@@ -108,12 +112,13 @@ public class Tcitas implements Serializable {
         this.description = description;
     }
 
-    public Tusers getTuserDate() {
-        return tuserDate;
+    @XmlTransient
+    public Collection<Tusers> getTusersCollection() {
+        return tusersCollection;
     }
 
-    public void setTuserDate(Tusers tuserDate) {
-        this.tuserDate = tuserDate;
+    public void setTusersCollection(Collection<Tusers> tusersCollection) {
+        this.tusersCollection = tusersCollection;
     }
 
     @Override
