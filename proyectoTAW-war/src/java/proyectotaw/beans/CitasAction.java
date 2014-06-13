@@ -6,6 +6,7 @@
 
 package proyectotaw.beans;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -91,7 +92,7 @@ public class CitasAction {
         this.paciente = paciente;
     }
     
-    public void crearCita(){
+    public void crearCita() throws IOException{
         Tcitas cita = new Tcitas();
         List<Tusers> users = new ArrayList<>();
         
@@ -111,6 +112,7 @@ public class CitasAction {
         cita.setTusersCollection(users);
         tcitasFacade.create(cita);
         
+        FacesContext.getCurrentInstance().getExternalContext().redirect("menuM.jsp");
     }
     
     

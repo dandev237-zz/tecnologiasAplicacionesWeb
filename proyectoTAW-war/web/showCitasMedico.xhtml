@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Citas</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            Introduce nuhsa de paciente: <h:inputText id="nuhsa" value="#{showCitasMedico.nuhsa}"/>
+            <h:commandButton value="Ver Citas" action="#{showCitasMedico.mostrarCitas()}">
+                <f:ajax execute="@this" render="@all"/>
+            </h:commandButton>
+        </h:form>
+        <h:form rendered ="#{showCitasMedico.citas != null}">
+            <h:dataTable id="citas" value="#{showCitasMedico.citas}" var="cita">
+                <h:column>
+                    <f:facet name="header">Fecha</f:facet>
+                        #{cita.date}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Descripcion</f:facet>
+                        #{cita.description}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Paciente</f:facet>
+                        #{showCitasMedico.showPaciente(cita)}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Importante</f:facet>
+                    <h:selectBooleanCheckbox disabled="true" value="#{cita.important}"/>
+                </h:column>
+                <h:column rendered="#{showCitasMedico.medico}">
+                    <f:facet name="header">Borrar</f:facet>
+                    <h:commandButton value="Borrar cita" action="#{showCitasMedico.borrarCita(cita)}">
+                        <f:ajax execute="@this" render="@form"/>
+                    </h:commandButton>                    
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </h:body>
+</html>
+

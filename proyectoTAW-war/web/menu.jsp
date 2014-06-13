@@ -83,6 +83,11 @@
                         <input type="submit" value="Consultar mensajes privados" style="width: 240px;">
                     </form></td>
             </tr>
+            <tr>
+                <td><form action="showCitasPaciente.jsf" method="GET">
+                        <input type="submit" value="Mostrar citas de paciente" style="width: 240px;">
+                    </form></td>
+            </tr>
         </table>
         <br>
         <form action="logout.jsp" method="GET">
