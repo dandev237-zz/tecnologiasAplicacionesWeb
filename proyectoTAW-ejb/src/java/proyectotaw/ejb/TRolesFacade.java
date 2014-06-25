@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package proyectotaw.ejb;
 
 import javax.ejb.Stateless;
@@ -13,10 +12,11 @@ import proyectotaw.entity.Troles;
 
 /**
  *
- * @author Alberto
+ * @author Fco Javier
  */
 @Stateless
 public class TrolesFacade extends AbstractFacade<Troles> implements TrolesFacadeLocal {
+
     @PersistenceContext(unitName = "proyectoTAW-ejbPU")
     private EntityManager em;
 
@@ -38,5 +38,5 @@ public class TrolesFacade extends AbstractFacade<Troles> implements TrolesFacade
     public Troles findByName(String name) {
         return em.createNamedQuery("Troles.findByName", Troles.class).getSingleResult();
     }
-    
+
 }

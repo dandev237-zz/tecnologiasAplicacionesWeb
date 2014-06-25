@@ -1,5 +1,6 @@
 package proyectotaw.beans;
 
+import java.util.Collection;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -28,9 +29,7 @@ public class MessageAction {
     private String dni;
     private String title;
     private String message;
-  
 
-  
     public String getTitle() {
         return title;
     }
@@ -66,29 +65,42 @@ public class MessageAction {
             msg.setUserId(receptor);
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
             if (session != null) {
-                
+
                 Tusers sender = (Tusers) session.getAttribute("user");
-                
+
                 if (sender != null) {
                     msg.setSender(sender.getName() + " - " + sender.getDni());
                     tmessagesFacade.create(msg);
-                    
+
                     context.addMessage(null, new FacesMessage("Mensaje enviado", "Autor: " + msg.getSender()));
-                } else context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al enviar mensaje",
-                        "Autor no encontrado. ¿Quizás la sesión ha caducado?"));
-            } else context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al enviar mensaje",
-                    "Sesión no encontrada."));
-        } else context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                "Error al enviar mensaje", "Receptor no encontrado."));
+                } else {
+                    context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al enviar mensaje",
+                            "Autor no encontrado. ¿Quizás la sesión ha caducado?"));
+                }
+            } else {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al enviar mensaje",
+                        "Sesión no encontrada."));
+            }
+        } else {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Error al enviar mensaje", "Receptor no encontrado."));
+        }
         dni = null;
         message = null;
         title = null;
     }
-    
-   
 
-    public void removeMessage(Tmessages message){
-        tmessagesFacade.remove(message);
+    public void removeMessage(Tmessages message) {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        if (session != null) {
+            Tusers user = (Tusers) session.getAttribute("user");
+            if (user != null) {
+                tmessagesFacade.remove(message);
+                Collection<Tmessages> col = user.getTmessagesCollection();
+                col.remove(message);
+                user.setTmessagesCollection(col);
+            }
+        }
     }
-    
+
 }

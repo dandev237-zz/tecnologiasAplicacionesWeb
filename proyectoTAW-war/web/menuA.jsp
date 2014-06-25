@@ -30,7 +30,7 @@
                 <th>Acciones</th>
             </tr>
             <tr>
-                <td><form action="location?action=map" method="GET">
+                <td><form action="map.jsf" method="GET">
                         <input type="submit" value="Mapa del hospital"
                                style="width: 240px;">
                     </form></td>
@@ -40,7 +40,7 @@
                     </form></td>
             </tr>
             <tr>
-                <td style="height: 28px;"><form action="location?action=hospital" method="GET">
+                <td style="height: 28px;"><form action="map.jsf" method="GET">
                         <input type="submit" value="Ubicación del hospital"
                                style="width: 240px;">
                     </form></td>
@@ -69,7 +69,7 @@
                     </form></td>
             </tr>
             <tr>
-                <td><form action="location?action=location" method="GET">
+                <td><form action="location.jsf" method="GET">
                         <input type="submit" value="Localización personal"
                                style="width: 240px;">
                     </form></td>
