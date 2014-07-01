@@ -13,6 +13,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.Dependent;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
@@ -25,9 +26,8 @@ import proyectotaw.entity.Tusers;
  *
  * @author Fco Javier
  */
-@Named(value = "showCitasMedico")
-@RequestScoped
-@ManagedBean
+@ViewScoped
+@ManagedBean(name = "showCitasMedico")
 public class ShowCitasMedicoBean {
     @EJB
     private TusersFacadeLocal tusersFacade;
@@ -81,13 +81,13 @@ public class ShowCitasMedicoBean {
         tcitasFacade.remove(cita);
     }
     
-    public Tusers showPaciente (Tcitas cita){
+    public String showPaciente (Tcitas cita){
         Tusers paciente = new Tusers();
         for( Tusers u: cita.getTusersCollection()){
             if(u.getRol().getId() != 1){
                 paciente = u;
             }
         }
-        return paciente;
+        return paciente.getName();
     }
 }

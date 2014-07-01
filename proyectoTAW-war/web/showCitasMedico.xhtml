@@ -10,10 +10,8 @@
         <h:form>
             Introduce nuhsa de paciente: <h:inputText id="nuhsa" value="#{showCitasMedico.nuhsa}"/>
             <h:commandButton value="Ver Citas" action="#{showCitasMedico.mostrarCitas()}">
-                <f:ajax execute="@this" render="@all"/>
+                <f:ajax execute="nuhsa" render="citas"/>
             </h:commandButton>
-        </h:form>
-        <h:form rendered ="#{showCitasMedico.citas != null}">
             <h:dataTable id="citas" value="#{showCitasMedico.citas}" var="cita">
                 <h:column>
                     <f:facet name="header">Fecha</f:facet>
